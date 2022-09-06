@@ -25,6 +25,7 @@ const Thrimetius = () => {
             handleFileChange={handleFile}
             handleTextChange={handleText}
             text={text}
+            Key={key}
             handleKey={handleKey}
           />
         </Grid>

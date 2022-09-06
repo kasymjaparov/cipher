@@ -18,7 +18,6 @@ const Cesar = () => {
 
   return (
     <div className="block">
-  
       <Grid container>
         <Grid item md={6}>
           <Form
@@ -26,6 +25,7 @@ const Cesar = () => {
             handleFileChange={handleFile}
             handleTextChange={handleText}
             text={text}
+            Key={key}
             handleKey={handleKey}
           />
         </Grid>
