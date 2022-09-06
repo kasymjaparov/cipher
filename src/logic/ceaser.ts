@@ -1,25 +1,36 @@
 // @ts-nocheck
 
-export function encryptCeaser(text, shift) {
-    var result = ""
-    for (var i = 0; i < text.length; i++) {
-        // верхний регистр
-        var c = text.charCodeAt(i)
-        if (c >= 65 && c <= 90) {
-            result += String.fromCharCode(((c - 65 + shift) % 26) + 65)
-        // нижний регистр
-        } else if (c >= 97 && c <= 122) {
-            result += String.fromCharCode(((c - 97 + shift) % 26) + 97)
+export function encryptCeaser(str: string, num: number): string {
+    const alphabet = "abcdefghijklmnopqrstuvwxyz".split("")
+    num = num % 26;
+    const strLowerCase = str.toLowerCase();
+    let newStr = "";
+
+    for (let i = 0; i < strLowerCase.length; i++) {
+        const currentLetter = strLowerCase[i];
+
+        if (currentLetter === " ") {
+            newStr += currentLetter;
+            continue;
+        }
+
+        const currentIndex = alphabet.indexOf(currentLetter);
+        let newIndex = currentIndex + num;
+        if (newIndex > 25) newIndex = newIndex - 26;
+        if (newIndex < 0) newIndex = 26 + newIndex;
+        if (str[i] === str[i].toUpperCase()) {
+            newStr += alphabet[newIndex].toUpperCase();
         } else {
-            result += text.charAt(i)
+            newStr += alphabet[newIndex];
         }
     }
-    return result
+    return newStr;
 }
 
 export function decryptCeaser(text, shift) {
     var result = ""
     shift = (26 - shift) % 26
-    result = encrypt(text, shift)
+    result = encryptCeaser(text, shift)
+    console.log(result)
     return result
 }

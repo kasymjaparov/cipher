@@ -1,26 +1,33 @@
 // @ts-nocheck
 
-export function encryptThrimetius(text, shift) {
-    const key = shift * 3 + 1
-    let result = ""
-    for (var i = 0; i < text.length; i++) {
-        var c = text.charCodeAt(i)
-
-        if (c >= 65 && c <= 90) {
-            result += String.fromCharCode(((c - 65 + key) % 26) + 65)
-        } else if (c >= 97 && c <= 122) {
-            result += String.fromCharCode(((c - 97 + key) % 26) + 97)
+export function encryptThrimetius(plainString, key) {
+    let shiftAmount = key * 3 + 1
+    var cipheredtext = "";
+    for (var i = 0; i < plainString.length; i++) {
+        var plainCharacter = plainString.charCodeAt(i);
+        if (plainCharacter >= 97 && plainCharacter <= 122) {
+            cipheredtext += String.fromCharCode((plainCharacter - 97 + shiftAmount) % 26 + 97);
+        } else if (plainCharacter >= 65 && plainCharacter <= 90) {
+            cipheredtext += String.fromCharCode((plainCharacter - 65 + shiftAmount) % 26 + 65);
         } else {
-            result += text.charAt(i)
+            cipheredtext += String.fromCharCode(plainCharacter);
         }
     }
-    return result
+    return cipheredtext;
 }
 
-export function decryptThrimetius(text, shift) {
-    const key = shift * 3 + 1
-    var result = ""
-    shift = (26 - key) % 26
-    result = encrypt(text, key)
-    return result
+export function decryptThrimetius(encryptedString, key) {
+    let unshiftAmount = key * 3 + 1
+    let plainText = "";
+    for (let i = 0; i < encryptedString.length; i++) {
+        let encryptedCharacter = encryptedString.charCodeAt(i);
+        if (encryptedCharacter >= 97 && encryptedCharacter <= 122) {
+            plainText += String.fromCharCode((encryptedCharacter - 97 - unshiftAmount + 26) % 26 + 97);
+        } else if (encryptedCharacter >= 65 && encryptedCharacter <= 90) {
+            plainText += String.fromCharCode((encryptedCharacter - 65 - unshiftAmount + 26) % 26 + 65);
+        } else {
+            plainText += String.fromCharCode(plainCharacter);
+        }
+    }
+    return plainText;
 }
