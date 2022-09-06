@@ -31,6 +31,5 @@ export function decryptCeaser(text, shift) {
     var result = ""
     shift = (26 - shift) % 26
     result = encryptCeaser(text, shift)
-    console.log(result)
     return result
 }

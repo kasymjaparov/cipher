@@ -2,7 +2,7 @@ import Form from "../../components/Form"
 import useForm from "../../hooks/useForm"
 import { decryptCeaser, encryptCeaser } from "../../logic/ceaser"
 import React from "react"
-import { Box, Grid } from "@mui/material"
+import { Box, Button, Grid, Typography } from "@mui/material"
 import FrequencyDictionary from "../../components/FrequencyDictionary"
 
 const Cesar = () => {
@@ -15,7 +15,18 @@ const Cesar = () => {
   const { text, onClickHandler, handleFile, handleText, key, handleKey } =
     useForm(encrypt, descrypt, 1)
   const [result, setResult] = React.useState<string>("")
+  const [findOutKey, setFindOutKey] = React.useState<number>(0)
 
+  const onGetKey = () => {
+    let k = 0
+    for (let i = 1; i < 25; i++) {
+      if (text === decryptCeaser(result, i)) {
+        k = i
+        break
+      }
+    }
+    setFindOutKey(k)
+  }
   return (
     <div className="block">
       <Grid container>
@@ -28,6 +39,14 @@ const Cesar = () => {
             Key={key}
             handleKey={handleKey}
           />
+          <Button
+            sx={{ marginY: "15px" }}
+            onClick={onGetKey}
+            variant="contained"
+          >
+            Узнать ключ
+          </Button>
+          {findOutKey ? <Typography>КЛЮЧ {findOutKey}</Typography> : null}
         </Grid>
         <Grid item md={6}>
           <Box
