@@ -42,6 +42,13 @@ const options = {
     },
   },
   scales: {
+    yAxes: [
+      {
+        ticks: {
+          stepSize: 0.01,
+        },
+      },
+    ],
     y: {
       type: "linear" as const,
       display: true,

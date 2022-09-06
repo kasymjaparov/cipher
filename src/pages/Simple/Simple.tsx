@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material"
+import { Box, Grid } from "@mui/material"
 import React from "react"
 import Form from "../../components/Form"
 import FrequencyDictionary from "../../components/FrequencyDictionary"
@@ -18,14 +18,21 @@ const Simple = () => {
 
   return (
     <div className="block">
-      <Form
-        onClickHandler={onClickHandler}
-        handleFileChange={handleFile}
-        handleTextChange={handleText}
-        text={text}
-        handleKey={handleKey}
-      />
       <Grid container>
+        <Grid item md={6}>
+          <Form
+            onClickHandler={onClickHandler}
+            handleFileChange={handleFile}
+            handleTextChange={handleText}
+            text={text}
+            handleKey={handleKey}
+          />
+        </Grid>
+        <Grid item md={6}>
+          <Box sx={{ wordBreak: "break-all", lineHeight: "25px",fontSize:"18px" }}>
+            {result}
+          </Box>
+        </Grid>
         <Grid item md={6}>
           <FrequencyDictionary tableName="Изначально" text={text} />
         </Grid>
