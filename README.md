@@ -11,4 +11,4 @@
 ## DEMO
  [DEMO]
 
-[DEMO]: https://cipher-alpha.vercel.app
+[DEMO]: https://cipher-adilet.vercel.app
