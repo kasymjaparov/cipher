@@ -6,6 +6,8 @@ import { Box, Button, Grid, Typography } from "@mui/material"
 import FrequencyDictionary from "../../components/FrequencyDictionary"
 
 const Cesar = () => {
+  const [result, setResult] = React.useState<string>("")
+  const [findOutKey, setFindOutKey] = React.useState<number>(0)
   const encrypt = () => {
     setResult(encryptCeaser(text, key))
   }
@@ -14,9 +16,6 @@ const Cesar = () => {
   }
   const { text, onClickHandler, handleFile, handleText, key, handleKey } =
     useForm(encrypt, descrypt, 1)
-  const [result, setResult] = React.useState<string>("")
-  const [findOutKey, setFindOutKey] = React.useState<number>(0)
-
   const onGetKey = () => {
     let k = 0
     for (let i = 1; i < 25; i++) {

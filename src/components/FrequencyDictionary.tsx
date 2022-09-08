@@ -105,9 +105,9 @@ const FrequencyDictionary: React.FC<FreqDictProp> = ({ text, tableName }) => {
                 return b[1] - a[1]
               })
               .map((item, index) => (
-                <TableRow>
+                <TableRow key={index}>
                   <TableCell>{index + 1}</TableCell>
-                  <TableCell>{item[0]}</TableCell>
+                  <TableCell>{item[0]===""?"Пробел":item[0]}</TableCell>
                   <TableCell>{(item[1] / text.length).toFixed(4)}</TableCell>
                 </TableRow>
               ))}

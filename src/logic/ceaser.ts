@@ -9,7 +9,7 @@ export function encryptCeaser(str: string, num: number): string {
     for (let i = 0; i < strLowerCase.length; i++) {
         const currentLetter = strLowerCase[i]
         if (symbols.some((item) => item === currentLetter)) {
-            newStr += currentLetter
+            newStr +=currentLetter
             continue
         }
         const currentIndex = alphabet.indexOf(currentLetter)

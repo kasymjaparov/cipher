@@ -19,6 +19,7 @@ const useForm = (encrypt: any, descrypt: any, Key: number) => {
         }
         if (file) {
             reader.readAsText(file)
+            setText(reader.result!.toString())
         }
     }
     const onClickHandler = (type: string) => {
