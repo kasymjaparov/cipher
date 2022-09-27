@@ -11,7 +11,7 @@ interface FormProp {
   handleFileChange: any
   handleTextChange: any
   text: string
-  Key?: number
+  Key?: string
   handleKey?: any
 }
 const Form: React.FC<FormProp> = ({
@@ -58,17 +58,16 @@ const Form: React.FC<FormProp> = ({
       />
       <br />
       <br />
-      {Key?.toString() ? (
+
         <>
           <div>КЛЮЧ</div>
           <OutlinedInput
             value={Key}
-            onChange={e => handleKey(e.target.value as unknown as number)}
-            type="number"
+            onChange={e => handleKey(e.target.value as unknown as string)}
             placeholder="КЛЮЧ"
           />
         </>
-      ) : null}
+    
       <br />
       <Button
         onClick={() => onClickHandler("e")}

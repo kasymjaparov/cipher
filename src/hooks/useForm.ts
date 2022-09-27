@@ -1,14 +1,14 @@
 import React from 'react'
 
-const useForm = (encrypt: any, descrypt: any, Key: number) => {
+const useForm = (encrypt: any, descrypt: any, Key: string) => {
     const [text, setText] = React.useState("")
-    const [key, setKey] = React.useState<number>(Key)
+    const [key, setKey] = React.useState<string>(Key)
 
     const [file, setFile] = React.useState<File | null>()
     const handleText = (str: string) => {
         setText(str)
     }
-    const handleKey = (str: number) => {
+    const handleKey = (str: string) => {
         setKey(str)
     }
     const handleFile = (file: File) => {

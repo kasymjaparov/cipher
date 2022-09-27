@@ -70,6 +70,27 @@ function wordFreq(string) {
       {}
     )
 }
+const symbols = [
+  " ",
+  ".",
+  ",",
+  "'",
+  ":",
+  "-",
+  "*",
+  "-",
+  "/",
+  "^",
+  "#",
+  "\n",
+  "\t",
+  "\0",
+  "\n",
+  "\v",
+  "\f",
+  "\r",
+  "",
+]
 interface FreqDictProp {
   text: string
   tableName: string
@@ -80,7 +101,11 @@ const FrequencyDictionary: React.FC<FreqDictProp> = ({ text, tableName }) => {
     datasets: [
       {
         label: tableName,
-        data: Object.entries(data),
+        data: Object.entries(data)
+          .filter(entry => entry[0] === " ")
+          .sort(function (a, b) {
+            return b[1] - a[1]
+          }),
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
         yAxisID: "y1",
@@ -107,7 +132,7 @@ const FrequencyDictionary: React.FC<FreqDictProp> = ({ text, tableName }) => {
               .map((item, index) => (
                 <TableRow key={index}>
                   <TableCell>{index + 1}</TableCell>
-                  <TableCell>{item[0]===""?"Пробел":item[0]}</TableCell>
+                  <TableCell>{item[0] === "" ? "" : item[0]}</TableCell>
                   <TableCell>{(item[1] / text.length).toFixed(4)}</TableCell>
                 </TableRow>
               ))}

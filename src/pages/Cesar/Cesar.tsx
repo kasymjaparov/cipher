@@ -4,6 +4,7 @@ import { decryptCeaser, encryptCeaser } from "../../logic/ceaser"
 import React from "react"
 import { Box, Button, Grid, Typography } from "@mui/material"
 import FrequencyDictionary from "../../components/FrequencyDictionary"
+import CopyToClipboard from "react-copy-to-clipboard"
 
 const Cesar = () => {
   const [result, setResult] = React.useState<string>("")
@@ -15,7 +16,7 @@ const Cesar = () => {
     setResult(decryptCeaser(text, key))
   }
   const { text, onClickHandler, handleFile, handleText, key, handleKey } =
-    useForm(encrypt, descrypt, 1)
+    useForm(encrypt, descrypt, "1")
   const onGetKey = () => {
     let k = 0
     for (let i = 1; i < 25; i++) {
@@ -38,13 +39,14 @@ const Cesar = () => {
             Key={key}
             handleKey={handleKey}
           />
-          <Button
+          {/* <Button
             sx={{ marginY: "15px" }}
             onClick={onGetKey}
             variant="contained"
           >
             Узнать ключ
-          </Button>
+          </Button> */}
+
           {findOutKey ? <Typography>КЛЮЧ {findOutKey}</Typography> : null}
         </Grid>
         <Grid item md={6}>
@@ -55,7 +57,9 @@ const Cesar = () => {
               fontSize: "18px",
             }}
           >
-            {result}
+            <CopyToClipboard text={result}>
+              <div>{result}</div>
+            </CopyToClipboard>
           </Box>
         </Grid>
         <Grid item md={6}>

@@ -4,6 +4,7 @@ import Form from "../../components/Form"
 import FrequencyDictionary from "../../components/FrequencyDictionary"
 import useForm from "../../hooks/useForm"
 import simpleCrypt from "../../logic/simple"
+import { CopyToClipboard } from "react-copy-to-clipboard"
 
 const Simple = () => {
   const [result, setResult] = React.useState<string>("")
@@ -14,7 +15,7 @@ const Simple = () => {
     setResult(simpleCrypt(text, "d"))
   }
   const { text, onClickHandler, handleFile, handleText, key, handleKey } =
-    useForm(encrypt, descrypt, 0)
+    useForm(encrypt, descrypt, "0")
 
   return (
     <div className="block">
@@ -29,8 +30,16 @@ const Simple = () => {
           />
         </Grid>
         <Grid item md={6}>
-          <Box sx={{ wordBreak: "break-all", lineHeight: "25px",fontSize:"18px" }}>
-            {result}
+          <Box
+            sx={{
+              wordBreak: "break-all",
+              lineHeight: "25px",
+              fontSize: "18px",
+            }}
+          >
+            <CopyToClipboard text={result}>
+              <div>{result}</div>
+            </CopyToClipboard>
           </Box>
         </Grid>
         <Grid item md={6}>

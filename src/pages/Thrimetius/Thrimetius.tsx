@@ -4,6 +4,7 @@ import React from "react"
 import { Box, Grid } from "@mui/material"
 import FrequencyDictionary from "../../components/FrequencyDictionary"
 import { decryptThrimetius, encryptThrimetius } from "../../logic/thrimetius"
+import CopyToClipboard from "react-copy-to-clipboard"
 
 const Thrimetius = () => {
   const encrypt = () => {
@@ -13,7 +14,7 @@ const Thrimetius = () => {
     setResult(decryptThrimetius(text, key))
   }
   const { text, onClickHandler, handleFile, handleText, key, handleKey } =
-    useForm(encrypt, descrypt, 1)
+    useForm(encrypt, descrypt, "")
   const [result, setResult] = React.useState<string>("")
 
   return (
@@ -37,7 +38,9 @@ const Thrimetius = () => {
               fontSize: "18px",
             }}
           >
-            {result}
+             <CopyToClipboard text={result}>
+              <div>{result}</div>
+            </CopyToClipboard>
           </Box>
         </Grid>
         <Grid item md={6}>
