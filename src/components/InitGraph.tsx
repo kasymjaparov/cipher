@@ -1,5 +1,3 @@
-// @ts-nocheck
-import React from "react"
 import Table from "@mui/material/Table"
 import TableBody from "@mui/material/TableBody"
 import TableCell from "@mui/material/TableCell"
@@ -20,6 +18,7 @@ import {
   Legend,
 } from "chart.js"
 import { Line } from "react-chartjs-2"
+import initFrequency from "../initFrequency"
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -42,7 +41,7 @@ const options = {
     },
   },
   scales: {
-    y: {
+    y1: {
       type: "linear" as const,
       display: true,
       position: "left" as const,
@@ -52,70 +51,21 @@ const options = {
     },
   },
 }
-
-export function wordFreq(string) {
-  return string
-    .replace(/[.]/g, "")
-    .split("")
-    .reduce(
-      (map, word) =>
-        Object.assign(map, {
-          [word]: map[word] ? map[word] + 1 : 1,
-        }),
-      {}
-    )
-}
-const symbols = [
-  " ",
-  ".",
-  ",",
-  "'",
-  ":",
-  "-",
-  "*",
-  "-",
-  "/",
-  "^",
-  "#",
-  "\n",
-  "\t",
-  "\0",
-  "\n",
-  "\v",
-  "\f",
-  "\r",
-  "",
-]
-interface FreqDictProp {
-  text: string
-  tableName: string
-}
-const FrequencyDictionary: React.FC<FreqDictProp> = ({ text, tableName }) => {
-  const prepareText = text.replace(/[^a-zа-яё]/gi, "")
-  let data = wordFreq(prepareText)
-  let dataForChart: any = []
-  Object.entries(data).forEach(element => {
-    if (symbols.includes(element[0])) {
-      return
-    }
-    dataForChart.push([element[0], element[1] / prepareText.length])
-  })
-
+const InitGraph = () => {
   const dataChart = {
     datasets: [
       {
-        label: tableName,
-        data: dataForChart,
+        label: "Изначально",
+        data: initFrequency.sort((a: any, b: any) => b[1] - a[1]),
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
-        yAxisID: "y",
+        yAxisID: "y1",
       },
     ],
   }
-  console.log(dataForChart)
   return (
     <div>
-      <Typography sx={{ marginY: "20px" }}>{tableName}</Typography>
+      <Typography sx={{ marginY: "20px" }}>Изначально</Typography>
       <TableContainer sx={{ width: 650 }} component={Paper}>
         <Table>
           <TableHead>
@@ -126,19 +76,19 @@ const FrequencyDictionary: React.FC<FreqDictProp> = ({ text, tableName }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {dataForChart.map((item, index) => (
+            {initFrequency.map((item, index) => (
               <TableRow key={index}>
                 <TableCell>{index + 1}</TableCell>
-                <TableCell>{item[0] === "" ? "" : item[0]}</TableCell>
-                <TableCell>{(item[1] * 100).toFixed(4)}%</TableCell>
+                <TableCell>{item[0]}</TableCell>
+                <TableCell>{item[1]} %</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      {text ? <Line options={options} data={dataChart} /> : null}
+      <Line options={options} data={dataChart} />
     </div>
   )
 }
 
-export default FrequencyDictionary
+export default InitGraph

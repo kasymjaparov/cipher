@@ -5,6 +5,7 @@ import FrequencyDictionary from "../../components/FrequencyDictionary"
 import useForm from "../../hooks/useForm"
 import simpleCrypt from "../../logic/simple"
 import { CopyToClipboard } from "react-copy-to-clipboard"
+import InitGraph from "../../components/InitGraph"
 
 const Simple = () => {
   const [result, setResult] = React.useState<string>("")
@@ -43,10 +44,10 @@ const Simple = () => {
           </Box>
         </Grid>
         <Grid item md={6}>
-          <FrequencyDictionary tableName="Изначально" text={text} />
+          <FrequencyDictionary tableName="После шифрования" text={result} />
         </Grid>
         <Grid item md={6}>
-          <FrequencyDictionary tableName="После шифрования" text={result} />
+          <InitGraph />
         </Grid>
       </Grid>
     </div>

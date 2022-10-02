@@ -13,7 +13,7 @@ export function encryptThrimetius(message: string, key: string) {
             encryptedMsg[i] = message[i]
             continue
         }
-        encryptedMsg[i] = alphabet[(alphabet.indexOf(message[i]) + alphabet.indexOf(newKey[i])) % 26]
+        encryptedMsg[i] = alphabet[(alphabet.indexOf(message[i]) + alphabet.indexOf(newKey[i])) % alphabet.length]
     }
     return encryptedMsg.join("")
 }
@@ -31,7 +31,7 @@ export function decryptThrimetius(message: string, key: string) {
             decryptedMsg[i] = message[i]
             continue
         }
-        decryptedMsg[i] = alphabet[(26 + alphabet.indexOf(message[i]) - alphabet.indexOf(newKey[i])) % 26]
+        decryptedMsg[i] = alphabet[(alphabet.length + alphabet.indexOf(message[i]) - alphabet.indexOf(newKey[i])) % alphabet.length]
     }
     return decryptedMsg.join("")
 }

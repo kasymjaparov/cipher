@@ -5,6 +5,7 @@ import { Box, Grid } from "@mui/material"
 import FrequencyDictionary from "../../components/FrequencyDictionary"
 import { decryptThrimetius, encryptThrimetius } from "../../logic/thrimetius"
 import CopyToClipboard from "react-copy-to-clipboard"
+import InitGraph from "../../components/InitGraph"
 
 const Thrimetius = () => {
   const encrypt = () => {
@@ -38,16 +39,16 @@ const Thrimetius = () => {
               fontSize: "18px",
             }}
           >
-             <CopyToClipboard text={result}>
+            <CopyToClipboard text={result}>
               <div>{result}</div>
             </CopyToClipboard>
           </Box>
         </Grid>
         <Grid item md={6}>
-          <FrequencyDictionary tableName="Изначально" text={text} />
+          <FrequencyDictionary tableName="После шифрования" text={result} />
         </Grid>
         <Grid item md={6}>
-          <FrequencyDictionary tableName="После шифрования" text={result} />
+          <InitGraph />
         </Grid>
       </Grid>
     </div>
